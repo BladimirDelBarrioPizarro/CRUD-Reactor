@@ -1,14 +1,10 @@
 package com.routerfunction.flux.controller;
 
 import com.routerfunction.flux.model.Product;
-import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.*;
-
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
 
 
 @RestController

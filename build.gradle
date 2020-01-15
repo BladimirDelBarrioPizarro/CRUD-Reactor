@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.routerfunction'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '13'
 
 configurations {
 	developmentOnly
@@ -25,7 +25,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas', version: '2.2.0.RELEASE'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

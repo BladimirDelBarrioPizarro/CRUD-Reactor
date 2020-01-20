@@ -2,6 +2,7 @@ package com.routerfunction.flux.boot;
 
 import com.routerfunction.flux.model.Product;
 import com.routerfunction.flux.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -12,13 +13,13 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 
 
 @Configuration
-public  class ApiRoute {
+public class ApiRoute {
 
 
     @Bean
-    public RouterFunction<ServerResponse> routes(ProductService productService){
-        return  route(GET("/api/v1/products"),req -> ok().body(productService.findAll(), Product.class))
-                .and(route(GET("/api/v1/products/{id}"),req -> ok().body(productService.findById(req.pathVariable("id")),Product.class)));
+    public RouterFunction<ServerResponse> routes(ProductHandler productHandler){
+        return  route(GET("/api/v1/products"), productHandler::getAll)
+                .and(route(GET("/api/v1/products/{id}"),productHandler::getById));
     }
 
 

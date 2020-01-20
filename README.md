@@ -227,5 +227,9 @@ public class MovieHandler {
         //.. More methods as needed
    }
 
+# RouterFunction
+
+RouterFunction<ServerResponse> routeFunctionSample = RouterFunctions.route(RequestPredicates.path("/sample-route"),request -> Response.ok().body(fromObject("Sample Route")));
+
 
 

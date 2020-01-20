@@ -8,10 +8,6 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 
 
-
-
-
-
 public class ProductControllerImpl implements ProductController {
 
     private ProductService productService;
@@ -21,8 +17,9 @@ public class ProductControllerImpl implements ProductController {
     }
 
 
-    @Override
-    public ResponseEntity<Flux<Product>> findAll() {
-        return new ResponseEntity<>(productService.findAll(),HttpStatus.OK);
-    }
+
+
+
+
+
 }

@@ -192,3 +192,40 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
+# HandleFunction
+
+public class MovieHandler {
+    public Mono<ServerResponse> listMovies(ServerRequest request) {
+        // Logic that returns all Movies objects
+    }
+    public Mono<ServerResponse> createMovie(ServerRequest request) {
+    // Logic that returns creates Movie object in the request object
+    }
+    public Mono<ServerResponse> getMovie(ServerRequest request) {
+     // Logic that returns one Movie object
+    }
+    //.. More methods as needed
+}
+
+    Mono<String>  helloWorld = request.body(BodyExtractors.toMono(String.class);
+    Mono<String> helloWorldUtil = request.bodyToMono(String.class);
+    Flux<Person> movie = request.body(BodyExtractors.toFlux(Movie.class);
+    Flux<Person> movieUtil = request.bodyToFlux(Movie.class);
+
+   Mono<Movie> movie = ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(movie);
+   
+   public class MovieHandler {
+    public Mono<ServerResponse> listMovies(ServerRequest request) {
+        // Logic that returns all Movies objects
+    }
+    public Mono<ServerResponse> createMovie(ServerRequest request) {
+        // Logic that returns creates Movie object in the request object
+    }
+    public Mono<ServerResponse> getMovie(ServerRequest request) {
+        // Logic that returns one Movie object
+    }
+        //.. More methods as needed
+   }
+
+
+

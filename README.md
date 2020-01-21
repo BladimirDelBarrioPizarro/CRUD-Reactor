@@ -231,5 +231,12 @@ public class MovieHandler {
 
 RouterFunction<ServerResponse> routeFunctionSample = RouterFunctions.route(RequestPredicates.path("/sample-route"),request -> Response.ok().body(fromObject("Sample Route")));
 
+# WebClient
 
+WebClient: WebClient client = WebClient.create ("http://any-domain.com");
+    Mono <Movie> movie = client.get ()
+        .url ("/ movie / {id}", 1L)
+        .accept(APPLICATION_JSON)
+        .exchange(request)
+        .then(response -> response.bodyToMono(Movie.class));
 

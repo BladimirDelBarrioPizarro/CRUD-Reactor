@@ -1,7 +1,6 @@
 package com.routerfunction.flux.boot;
 
-import com.routerfunction.flux.controller.ProductController;
-import com.routerfunction.flux.controller.impl.ProductControllerImpl;
+
 import com.routerfunction.flux.dao.ProductDao;
 import com.routerfunction.flux.service.ProductService;
 import com.routerfunction.flux.service.impl.ProductServiceImpl;
@@ -16,12 +15,6 @@ public class ApiConfig {
     public ProductService productService(ProductDao productDao){
         return new ProductServiceImpl(productDao);
     }
-
-    @Bean
-    public ProductController productController(ProductService productService){
-        return new ProductControllerImpl(productService);
-    }
-
 
 }
 

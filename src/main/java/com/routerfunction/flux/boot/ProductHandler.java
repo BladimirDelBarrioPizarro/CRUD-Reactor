@@ -3,21 +3,16 @@ package com.routerfunction.flux.boot;
 import com.routerfunction.flux.model.Product;
 import com.routerfunction.flux.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
-
-import java.net.URI;
-
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 
 @Component
 public class ProductHandler {
-
 
     @Autowired
     private ProductService productService;
@@ -39,11 +34,20 @@ public class ProductHandler {
    }
 
    public Mono<ServerResponse> insertProduct(ServerRequest request) {
-        return request.bodyToMono(Product.class)
+         return request.bodyToMono(Product.class)
                 .flatMap(item -> productService.save(item))
                 .flatMap(item -> ServerResponse
-                                .created(URI.create("/api/v1/products".concat(item.getId())))
-                                .body(fromValue(item)));
+                                .ok()
+                                .body(fromValue("URI Resource: "+request.uri().toString().concat("/" + item.getId()))));
+   }
+
+   public Mono<ServerResponse> updateProduct(ServerRequest request){
+       return request.bodyToMono(Product.class)
+               .flatMap(item -> productService.save(item))
+               .flatMap(item -> ServerResponse
+                       .ok()
+                       .body(fromValue("URI Resource: "+request.uri().toString().concat("/" + item.getId()))))
+               .switchIfEmpty(ServerResponse.notFound().build());
    }
 }
 

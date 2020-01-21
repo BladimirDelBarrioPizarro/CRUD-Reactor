@@ -33,7 +33,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Mono<Product> save(Product product) {
-        return productDao.save(product);
+        return productDao.save(product)
+                .doOnNext(item -> log.info(" -- POST /products/{}",product.getId()));
+    }
+
+    @Override
+    public Mono<Product> update(Product product) {
+        return productDao.save(product)
+                .doOnNext(item -> log.info(" -- PUT /products/{}",product.getId()));
     }
 
     @Override

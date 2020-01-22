@@ -18,7 +18,8 @@ public class ApiRoute {
         return  route(GET("/api/v1/products"), productHandler::getAll)
                 .and(route(GET("/api/v1/products/{id}"),productHandler::getById))
                 .and(route(POST("/api/v1/products"),productHandler::insertProduct))
-                .and(route(PUT("/api/v1/products"),productHandler::updateProduct));
+                .and(route(PUT("/api/v1/products"),productHandler::updateProduct))
+                .and(route(DELETE("/api/v1/products/{id}"),productHandler::deleteProduct));
     }
 
 

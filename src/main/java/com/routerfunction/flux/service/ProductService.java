@@ -12,5 +12,5 @@ public interface ProductService {
      Mono<Product> findById(String id);
      Mono<Product> save(Product product);
      Mono<Product> update(Product product);
-     Mono<Void> delete(Product product);
+     Mono<Void> deleteById(String id);
 }

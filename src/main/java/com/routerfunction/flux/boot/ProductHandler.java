@@ -26,11 +26,12 @@ public class ProductHandler {
 
 
    public Mono<ServerResponse> getById(ServerRequest request){
-       return productService.findById(request.pathVariable("id")).flatMap( product -> ServerResponse
+       return productService.findById(request.pathVariable("id"))
+               .flatMap( product -> ServerResponse
                .ok()
                .contentType(MediaType.APPLICATION_JSON)
                .body(fromValue(product)))
-               .switchIfEmpty(ServerResponse.notFound().build());
+               .switchIfEmpty(ServerResponse.noContent().build());
    }
 
    public Mono<ServerResponse> insertProduct(ServerRequest request) {
@@ -43,11 +44,19 @@ public class ProductHandler {
 
    public Mono<ServerResponse> updateProduct(ServerRequest request){
        return request.bodyToMono(Product.class)
-               .flatMap(item -> productService.save(item))
+               .flatMap(item -> productService.update(item))
                .flatMap(item -> ServerResponse
                        .ok()
                        .body(fromValue("URI Resource: "+request.uri().toString().concat("/" + item.getId()))))
                .switchIfEmpty(ServerResponse.notFound().build());
+   }
+
+   public Mono<ServerResponse> deleteProduct(ServerRequest request){
+        return productService.findById(request.pathVariable("id"))
+                .flatMap(item -> ServerResponse
+                            .noContent()
+                            .build(productService.deleteById(item.getId())))
+                .switchIfEmpty(ServerResponse.notFound().build());
    }
 }
 

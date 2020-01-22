@@ -44,7 +44,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Mono<Void> delete(Product product) {
-        return productDao.delete(product);
+    public Mono<Void> deleteById(String id) {
+        return productDao.deleteById(id)
+                .doOnNext(item -> log.info(" -- DELETE /product/{}",id));
     }
 }

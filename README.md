@@ -240,3 +240,6 @@ WebClient: WebClient client = WebClient.create ("http://any-domain.com");
         .exchange(request)
         .then(response -> response.bodyToMono(Movie.class));
 
+# Spring Security Web-Flux -> WebFilter -> AuthenticationWebFilter
+
+ 

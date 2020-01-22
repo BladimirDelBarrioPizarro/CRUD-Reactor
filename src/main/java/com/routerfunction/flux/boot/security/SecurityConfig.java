@@ -31,7 +31,8 @@ public class SecurityConfig {
 
     @Bean
     SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) throws Exception{
-        return http.authorizeExchange()
+        return http.csrf().disable()
+                .authorizeExchange()
                 .pathMatchers(HttpMethod.GET,"/api/v1/products**").hasAnyRole("USER","ADMIN")
                 .pathMatchers(HttpMethod.POST,"/api/v1/products").hasRole("ADMIN")
                 .pathMatchers(HttpMethod.PUT,"/api/v1/products").hasRole("ADMIN")

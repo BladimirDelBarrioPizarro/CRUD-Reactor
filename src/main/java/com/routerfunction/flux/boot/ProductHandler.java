@@ -31,7 +31,7 @@ public class ProductHandler {
                .ok()
                .contentType(MediaType.APPLICATION_JSON)
                .body(fromValue(product)))
-               .switchIfEmpty(ServerResponse.noContent().build());
+               .switchIfEmpty(ServerResponse.notFound().build());
    }
 
    public Mono<ServerResponse> insertProduct(ServerRequest request) {

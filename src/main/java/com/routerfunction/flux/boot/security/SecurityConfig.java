@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.GET,"/api/v1/products**").hasAnyRole("USER","ADMIN")
                 .pathMatchers(HttpMethod.POST,"/api/v1/products").hasRole("ADMIN")
+                .pathMatchers(HttpMethod.POST,"/api/v1/products/upload/**").hasRole("ADMIN")
                 .pathMatchers(HttpMethod.PUT,"/api/v1/products").hasRole("ADMIN")
                 .pathMatchers(HttpMethod.DELETE,"/api/v1/products").hasRole("ADMIN")
                 .anyExchange().authenticated()

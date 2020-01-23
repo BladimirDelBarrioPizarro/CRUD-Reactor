@@ -71,11 +71,11 @@ public class ProductHandler {
                       .cast(FilePart.class)
                       .flatMap(file -> productService.findById(id)
                               .flatMap(product -> {
-                                   product.setFile(UUID.randomUUID().toString() + " - " + file.filename()
+                                   product.setFile(UUID.randomUUID().toString() + "-" + file.filename()
                                     .replace(" ","-")
                                     .replace(":","")
                                     .replace("\\",""));
-                                 return file.transferTo(new File(properties.getPath()+product.getFile()))
+                                 return file.transferTo(new File(product.getFile()))
                                          .then(productService.save(product));
 
                       })).flatMap(p -> ServerResponse.created(URI.create("/api/v1/products/".concat(p.getId())))

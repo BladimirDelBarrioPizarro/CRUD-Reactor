@@ -75,7 +75,7 @@ public class ProductHandler {
                                     .replace(" ","-")
                                     .replace(":","")
                                     .replace("\\",""));
-                                 return file.transferTo(new File(product.getFile()))
+                                 return file.transferTo(new File("C:/src/flux/upload/"+"-"+product.getFile()))
                                          .then(productService.save(product));
 
                       })).flatMap(p -> ServerResponse.created(URI.create("/api/v1/products/".concat(p.getId())))

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -16,4 +17,9 @@ public class Product {
     private String item;
     private Integer qty;
     private String file;
+
+    public Product(String item, Integer qty) {
+        this.item = item;
+        this.qty = qty;
+    }
 }

@@ -19,7 +19,8 @@ public class ApiRoute {
                 .and(route(POST("/api/v1/products"),productHandler::insertProduct))
                 .and(route(PUT("/api/v1/products"),productHandler::updateProduct))
                 .and(route(DELETE("/api/v1/products/{id}"),productHandler::deleteProduct))
-                .and(route(POST("/api/v1/products/upload/{id}"),productHandler::uploadProduct));
+                .and(route(POST("/api/v1/products/upload/{id}"),productHandler::uploadProduct))
+                .and(route(POST("/api/v1/products/create"),productHandler::saveProductFile));
     }
 
 

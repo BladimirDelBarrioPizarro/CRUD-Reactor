@@ -1,21 +1,34 @@
-package com.routerfunction.flux.boot;
+package com.routerfunction.flux.boot.route;
 
+import com.routerfunction.flux.boot.properties.Properties;
 import com.routerfunction.flux.model.Product;
 import com.routerfunction.flux.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+
+import java.io.File;
+import java.net.URI;
+import java.util.UUID;
+
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 
 @Component
 public class ProductHandler {
 
-    @Autowired
+
     private ProductService productService;
+
+    private Properties properties;
+
+    public ProductHandler(ProductService productService, Properties properties){
+        this.properties = properties;
+        this.productService = productService;
+    }
 
 
     public Mono<ServerResponse> getAll(ServerRequest request){
@@ -50,6 +63,28 @@ public class ProductHandler {
                        .body(fromValue("URI Resource: "+request.uri().toString().concat("/" + item.getId()))))
                .switchIfEmpty(ServerResponse.notFound().build());
    }
+
+
+   public Mono<ServerResponse> uploadProduct(ServerRequest request){
+        String id = request.pathVariable("id");
+        return request.multipartData().map(item -> item.toSingleValueMap().get("file"))
+                      .cast(FilePart.class)
+                      .flatMap(file -> productService.findById(id)
+                              .flatMap(product -> {
+                                   product.setFile(UUID.randomUUID().toString() + " - " + file.filename()
+                                    .replace(" ","-")
+                                    .replace(":","")
+                                    .replace("\\",""));
+                                 return file.transferTo(new File(properties.getPath()+product.getFile()))
+                                         .then(productService.save(product));
+
+                      })).flatMap(p -> ServerResponse.created(URI.create("/api/v1/products/".concat(p.getId())))
+                         .contentType(MediaType.APPLICATION_JSON)
+                         .body(fromValue(p)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+
+   }
+
 
    public Mono<ServerResponse> deleteProduct(ServerRequest request){
         return productService.findById(request.pathVariable("id"))

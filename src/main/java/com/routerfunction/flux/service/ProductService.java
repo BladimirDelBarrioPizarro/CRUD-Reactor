@@ -1,8 +1,6 @@
 package com.routerfunction.flux.service;
 
 import com.routerfunction.flux.model.Product;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

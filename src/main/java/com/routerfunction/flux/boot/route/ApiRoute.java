@@ -22,6 +22,4 @@ public class ApiRoute {
                 .and(route(POST("/api/v1/products/upload/{id}"),productHandler::uploadProduct))
                 .and(route(POST("/api/v1/products/create"),productHandler::saveProductFile));
     }
-
-
 }

@@ -22,4 +22,10 @@ public class Product {
         this.item = item;
         this.qty = qty;
     }
+
+    public Product(String item, Integer qty, String file) {
+        this.item = item;
+        this.qty = qty;
+        this.file = file;
+    }
 }

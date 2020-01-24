@@ -71,10 +71,7 @@ public class ProductHandler {
             FormFieldPart itemFieldPart = (FormFieldPart) multipart.toSingleValueMap().get("item");
             FormFieldPart qtyFieldPart = (FormFieldPart) multipart.toSingleValueMap().get("qty");
 
-             String item = itemFieldPart.value();
-             Integer qty =  Integer.parseInt(qtyFieldPart.value());
-             
-            return new Product(item,qty);
+            return new Product(itemFieldPart.value(),Integer.parseInt(qtyFieldPart.value()));
 
         });
         return request.multipartData().map(item -> item.toSingleValueMap().get("file"))
